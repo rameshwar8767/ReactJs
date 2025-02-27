@@ -24,8 +24,8 @@ function App() {
       str+="~!@#$%^&*()_+=|\?/"
     }
     for (let index = 1; index <= length; index++) {
-      let char = Math.floor((Math.random()*str.length)+1)
-      pass += str.charAt(char)
+      let charIndex = Math.floor((Math.random()*str.length)+1)
+      pass = pass + str.charAt(charIndex)
     }
 
     setPassword(pass)    
