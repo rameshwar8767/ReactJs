@@ -26,7 +26,7 @@ export const todoSlice = createSlice({
             const todo = state.todos.find((todo) => todo.id === id)
             if(todo){
                 todo.text = text
-            }
+            } 
         }
     }
 })
