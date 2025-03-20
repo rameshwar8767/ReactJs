@@ -75,17 +75,54 @@ export class Service {
             return false;
         }
     }
-    async getPosts(){
+    async getPosts(queries=[Query.equal('status', 'true')]){
         try {
             return await this.databases.listDocuments(
                 config.appwriteDatabaseId ,
-                config.appwriteCollectionId
+                config.appwriteCollectionId,
+                queries
             );
         } catch (error) {
             console.error(error);
             return false;
         }
     }
+
+    //file upload services
+
+    async uploadFile(file){
+        try {
+            return await this.bucket.createFile(
+                config.appwriteBucketId,
+                ID.unique(),
+                file,
+            );
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    }
+    async deleteFile(fileId){
+        try {
+            await this.bucket.deleteFile(
+                config.appwriteBucketId,
+                fileId
+
+            );
+            return true;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    }
+    getFilePreview(fileId){
+        return this.bucket.getFilePreview(
+            config.appwriteBucketId,
+            fileId
+        )
+    }
+    
+    
 }
 const Service = new Service();
 
